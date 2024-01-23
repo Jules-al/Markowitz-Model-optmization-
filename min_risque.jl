@@ -9,7 +9,7 @@ using JuMP
 
 
  
-# #Données secteur Technologie/ Santé et chimmie/ FINANCE/ TELECOMS /AERONAUTIQUE/ Industrie Lourde / Service et distribution 
+# #Données secteur Technologie/ Santé et chimmie/ FINANCE/ TELECOMS /AERONAUTIQUE/ Industrie Lourde / Service et distribution Euro stoxx 50 
 #data = get_prices.(["AAPL","MSFT","INTC","ORCL","IBM","HPQ","SNY","NVS","PFE","MRK","DIM.PA","JNJ","ERF.PA","AGNC","BSBK","CVCY","FNLC", "SCOBX","ORA.PA", "VZ", "VOD.L", "DTE.DE","BA","AIR.PA", "BDRAF", "GD", "LMT", "004560.KS", "ALO.PA", "SU.PA", "DG.PA", "BOUYF", "AMZN", "EBAY", "DANOY", "ALO.PA", "MC.PA", "CDI.PA"],range="6mo",interval="1d",startdt="2020-01-01", enddt="2020-06-30");
 data = get_prices.(["AMS","SAP","ASML.AS","CAP.PA","IFX.BE","SNY","NVS","AZN","FRE.DE","BAYN.DE","LLD.DE","ALV.DE","SAN","BNP.PA","GLE.PA","DTE","TEF","ORA.PA","NOKIA.HE","VOD.L","AIR.PA", "SAF.PA","HO.PA", "LDO.MI","DSY.PA", "SIE.BE", "SU.PA","DG.PA","ATLCY", "TTE.PA", "OR.PA", "PG", "NESN.SW", "BN.PA", "ABI.BR"],range="6mo",interval="1d", startdt="2020-01-01", enddt="2020-06-30");
 
@@ -28,7 +28,7 @@ secteur_tickers = Dict(
     "Industrie Lourde" => ["SIE.BE", "SU.PA", "DG.PA", "ATLCY", "TTE.PA"],
     "Service et distribution" => ["OR.PA", "PG", "NESN.SW", "ABI.BR","BN.PA"]
 )
-# Calcul de ma matrice des covariances 
+ 
 #------------------------------------------------
 
 # Obtenir la liste des tickers uniques
@@ -63,6 +63,7 @@ target_return= 0.38862265150741815/2
 println(target_return)
 n_assets = length(tickers_uniques)
 
+#Creation du modèle d'optimisation 
 m = Model(Gurobi.Optimizer)
 @variable(m, x[1:n_assets]>=0)
 #les deux contraintes pour l'optimisation (minimoisation de la variance )
